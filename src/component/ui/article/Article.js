@@ -16,7 +16,7 @@ const Article = ({ title, resume, slug }) => {
         <>
           <h3>{title}</h3>
           <p> {resume} </p>
-          <a href="#">Lire la suite</a>
+          <NavLink href="#">Lire la suite</NavLink>
         </>
       )}
     </article>

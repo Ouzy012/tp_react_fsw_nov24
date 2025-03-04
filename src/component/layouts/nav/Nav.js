@@ -15,7 +15,7 @@ const Nav = () => {
               <a href="">Articles</a>
             </li>
             <li>
-              <a href="">À propos</a>
+              <NavLink to="/rediger-article">Rédiger un article</NavLink>
             </li>
             <li>
               <a href="">Contact</a>
