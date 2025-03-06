@@ -1,4 +1,7 @@
-const Input = ({ label, type, name, placeholder, required = true }) => {
+import { useState } from "react";
+
+const Input = ({ label, type, name, placeholder, onChangeValue, required = true }) => {
+  
   return (
     <>
       <label> {label} </label>
@@ -7,6 +10,7 @@ const Input = ({ label, type, name, placeholder, required = true }) => {
         name={name}
         placeholder={placeholder}
         required={required}
+        onChange={onChangeValue}
       />
     </>
   );
@@ -14,11 +18,11 @@ const Input = ({ label, type, name, placeholder, required = true }) => {
 
 export default Input;
 
-export const Select = ({ label, name, option }) => {
+export const Select = ({ label, name, option, select }) => {
   return (
     <>
       <label> {label} </label>
-      <select name={name}>
+      <select name={name} onChange={select}>
         <option value="">Selectionnez une catégorie</option>
         {option.map((value) => (
           <option key={value.id} value={value.name}>
@@ -31,11 +35,11 @@ export const Select = ({ label, name, option }) => {
   );
 };
 
-export const TextArea = ({ label, name }) => {
+export const TextArea = ({ label, name, onChangeValue }) => {
   return (
     <>
       <label> {label} </label>
-      <textarea cols="5" rows="5" name={name}></textarea>
+      <textarea cols="5" rows="5" name={name} onChange={onChangeValue}></textarea>
     </>
   );
 };

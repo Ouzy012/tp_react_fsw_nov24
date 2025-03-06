@@ -1,6 +1,7 @@
 import Article from "../component/ui/article/Article";
 
-const Home = () => {
+const Home = () => {  
+
   const articles = [
     {
       title: "Titre 1",
