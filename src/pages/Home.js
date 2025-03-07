@@ -1,29 +1,33 @@
+import { useEffect, useState } from "react";
 import Article from "../component/ui/article/Article";
+import axios from "axios";
+import { apiUrl } from "../env";
 
 const Home = () => {  
 
-  const articles = [
-    {
-      title: "Titre 1",
-      resume: "Voici un résumé de l'article",
-      slug: "",
-    },
-    {
-      title: "Titre 1",
-      resume: "Voici un résumé de l'article",
-      slug: "",
-    },
-    {
-      title: "Titre 1",
-      resume: "Voici un résumé de l'article",
-      slug: "",
-    },
-    {
-      title: "Titre 1",
-      resume: "Voici un résumé de l'article",
-      slug: "",
-    },
-  ];
+  const [articles, setArticles] = useState([{}])
+
+  useEffect(()=> {
+    fetchArticles()
+    
+  }, [])
+
+  const fetchArticles = async () => {
+    //La liste des articles 
+    await axios.get(`${apiUrl}/posts`)
+    .then(response => {      
+      setArticles(response.data);  
+          
+    })
+    .catch(error => {
+      console.log(error);
+      
+    })
+    .finally(err => {
+
+    })
+  }
+
   return (
     <main className="container">
       <section className="intro">
@@ -39,10 +43,10 @@ const Home = () => {
         <h2>Articles Récents</h2>
         {articles.map((value, key) => (
           <Article
-            key={key}
+            key={value.id}
             title={value.title}
-            resume={value.resume}
-            slug={value.slug}
+            resume={value.body}
+            userId={value.userId}
           />
         ))}
       </section>

@@ -1,16 +1,36 @@
 import { NavLink } from "react-router";
 import "./article.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { apiUrl } from "../../../env";
 
-const Article = ({ title, resume, slug }) => {
-  const [loading, setLoading] = useState(true);
+const Article = ({ title, resume, userId }) => {
   const [view, setView] = useState(0);
+  const [user, setUser] = useState({});
+  const [loading, setLoading] = useState(true);
 
-  setTimeout(() => {
-    setLoading(false);
-  }, 1000);
+  useEffect(() => {
+    getUser(userId);
+  }, []);
 
-  const compterLecture = () => setView(view + 1);
+  async function getUser(id) {
+    await axios
+      .get(`${apiUrl}/users/${id}`)
+      .then((response) => {
+        setUser({
+          fullname: response.data.name,
+          username: response.data.username,
+        });
+        
+      })
+      .catch((error) => {
+        //console.log("erreur", error);
+      })
+      .finally((err) => {
+        setLoading(false);
+      });
+  }
+
   return (
     <article>
       {loading ? (
@@ -18,9 +38,13 @@ const Article = ({ title, resume, slug }) => {
       ) : (
         <>
           <h3>{title}</h3>
+          <span>
+            Article de {user.fullname} @{user.username}{" "}
+          </span>{" "}
+          <br />
           <span>Lu {view} fois</span>
           <p> {resume} </p>
-          <NavLink href="#">Lire la suite</NavLink>{" "}
+
           {/* <NavLink onClick={compterLecture} href="#">
             Commencer la lecture
           </NavLink> */}
