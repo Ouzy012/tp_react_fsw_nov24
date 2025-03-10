@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { apiUrl } from "../../../env";
 
-const Article = ({ title, resume, userId }) => {
+const Article = ({ title, resume, userId, idArticle }) => {
   const [view, setView] = useState(0);
   const [user, setUser] = useState({});
   const [loading, setLoading] = useState(true);
@@ -19,7 +19,7 @@ const Article = ({ title, resume, userId }) => {
       .then((response) => {
         setUser({
           fullname: response.data.name,
-          username: response.data.username,
+          username: response.data.username,          
         });
         
       })
@@ -48,7 +48,7 @@ const Article = ({ title, resume, userId }) => {
           {/* <NavLink onClick={compterLecture} href="#">
             Commencer la lecture
           </NavLink> */}
-          <NavLink onClick={() => setView(view + 1)} href="#">
+          <NavLink to={`/lire-article/${idArticle}`}>
             Commencer la lecture
           </NavLink>
         </>

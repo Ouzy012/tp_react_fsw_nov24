@@ -17,7 +17,7 @@ const Nav = () => {
         <nav>
           <ul>
             <li>
-              <NavLink style={{ color: mode ? "#fff" : "#333" }} to="#">
+              <NavLink style={{ color: mode ? "#fff" : "#333" }} to="/">
                 Accueil
               </NavLink>
             </li>

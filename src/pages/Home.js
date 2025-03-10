@@ -41,12 +41,13 @@ const Home = () => {
 
       <section className="recent-posts">
         <h2>Articles Récents</h2>
-        {articles.map((value, key) => (
+        {articles.map((value) => (
           <Article
             key={value.id}
             title={value.title}
             resume={value.body}
             userId={value.userId}
+            idArticle={value.id}
           />
         ))}
       </section>
