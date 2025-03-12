@@ -1,7 +1,7 @@
 import { useState } from "react";
+import "./input.css";
 
-const Input = ({ label, type, name, placeholder, onChangeValue, required = true }) => {
-  
+const Input = ({ label, type, name, placeholder, onChangeValue, error }) => {
   return (
     <>
       <label> {label} </label>
@@ -9,16 +9,16 @@ const Input = ({ label, type, name, placeholder, onChangeValue, required = true 
         type={type}
         name={name}
         placeholder={placeholder}
-        required={required}
         onChange={onChangeValue}
       />
+      {error[name] && <span style={{ color: "red" }}> {error[name]} </span>}
     </>
   );
 };
 
 export default Input;
 
-export const Select = ({ label, name, option, select }) => {
+export const Select = ({ label, name, option, select, error }) => {
   return (
     <>
       <label> {label} </label>
@@ -31,15 +31,32 @@ export const Select = ({ label, name, option, select }) => {
           </option>
         ))}
       </select>
+      {error[name] && <span style={{ color: "red" }}> {error[name]} </span>}
     </>
   );
 };
 
-export const TextArea = ({ label, name, onChangeValue }) => {
+export const TextArea = ({ label, name, onChangeValue, error }) => {
+  const [count, setCount] = useState(0)
+  function countWord(event) {
+    const textArray = event.target.value;
+    setCount(textArray.split(" ").length - 1);
+    
+  }
   return (
     <>
       <label> {label} </label>
-      <textarea cols="5" rows="5" name={name} onChange={onChangeValue}></textarea>
+      <textarea
+        cols="5"
+        rows="5"
+        name={name}
+        onChange={countWord}
+      ></textarea>
+      <div className="count-word">
+        <span> {count > 1 ? `nombre de mots` : 'nombre de mot'} : {count} </span>
+      </div>
+
+      {error[name] && <span style={{ color: "red" }}> {error[name]} </span>}
     </>
   );
 };

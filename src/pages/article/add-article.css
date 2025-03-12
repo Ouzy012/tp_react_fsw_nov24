@@ -1,0 +1,28 @@
+.form-body {
+    margin: auto;
+    background-color: #fff;
+    width: 60%;
+}
+
+.form-title {
+    text-align: center;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.form-group input, select {
+    width: 60%;
+    height: 30px;
+    border-radius: 30px;
+    border: .6px solid black;
+}
+
+.form-block {
+    display: flex;
+    flex-direction: row;
+    
+}
